@@ -1,12 +1,12 @@
 class Stylemd < Formula
   desc "Markdown styling toolkit — lint, format, fix, and polish your prose"
   homepage "https://github.com/leaf-kit/style.md"
-  version "0.1.0"
+  version "0.2.0"
   license "MIT"
 
   on_macos do
-    url "https://github.com/leaf-kit/style.md/releases/download/v0.1.0/stylemd-x86_64-apple-darwin.tar.gz"
-    sha256 "66c0a3265749c2a42ab4e2bb86f6df9d3b8fee334b9d465268e6afb3f2558153"
+    url "https://github.com/leaf-kit/style.md/releases/download/v0.2.0/stylemd-x86_64-apple-darwin.tar.gz"
+    sha256 "6b734d9521b189155b5866b48183970b3ec5a4e1cee4cc923835436477fb1af1"
   end
 
   def install
