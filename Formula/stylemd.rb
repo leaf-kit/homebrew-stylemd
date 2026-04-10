@@ -1,18 +1,26 @@
 class Stylemd < Formula
   desc "Markdown styling toolkit — lint, format, fix, and polish your prose"
   homepage "https://github.com/leaf-kit/style.md"
-  url "https://github.com/leaf-kit/style.md/archive/refs/tags/v0.1.0.tar.gz"
-  sha256 "ac1581e95a058b8b380ddca23e32841e4e0fc0d989c850a414817714145c6196"
+  version "0.1.0"
   license "MIT"
 
-  depends_on "rust" => :build
+  on_macos do
+    url "https://github.com/leaf-kit/style.md/releases/download/v0.1.0/stylemd-x86_64-apple-darwin.tar.gz"
+    sha256 "66c0a3265749c2a42ab4e2bb86f6df9d3b8fee334b9d465268e6afb3f2558153"
+  end
 
   def install
-    system "cargo", "install", *std_cargo_args
+    bin.install "stylemd"
   end
 
   test do
-    (testpath / "test.md").write("# Hello\n\nWorld\n")
-    system bin / "stylemd", "check", "test.md"
+    assert_match "stylemd #{version}", shell_output("#{bin}/stylemd --version")
+
+    (testpath/"test.md").write("# Title\ntext   \n")
+    output = shell_output("#{bin}/stylemd check #{testpath}/test.md 2>&1")
+    assert_match "trailing", output.downcase
+
+    system bin/"stylemd", "init"
+    assert_predicate testpath/".stylemd.toml", :exist?
   end
 end
